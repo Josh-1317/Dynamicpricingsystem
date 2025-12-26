@@ -4,7 +4,21 @@ import fs from 'fs';
 import path from 'path';
 
 const PORT = process.env.PORT || 3001;
-const DB_FILE = 'db.json';
+const DB_FILE = process.env.DB_FILE_PATH || 'db.json';
+
+// Helper to ensure directory exists
+const ensureDirectoryExistence = (filePath) => {
+    const dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    ensureDirectoryExistence(dirname);
+    try {
+        fs.mkdirSync(dirname);
+    } catch (e) {
+        // Ignore error if it was created in the meantime
+    }
+};
 
 // Helper to load DB
 const loadDB = () => {
@@ -22,6 +36,7 @@ const loadDB = () => {
 // Helper to save DB
 const saveDB = (data) => {
     try {
+        ensureDirectoryExistence(DB_FILE);
         fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
     } catch (e) {
         console.error('Error saving DB:', e);
