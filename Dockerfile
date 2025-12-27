@@ -17,4 +17,4 @@ RUN mkdir -p /app/data
 EXPOSE 3001
 
 # Start command
-CMD ["node", "mock-server.js"]
+CMD ["node", "diagnostic.js"]
