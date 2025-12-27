@@ -184,12 +184,14 @@ const server = http.createServer((req, res) => {
                 sendJson({ success: false, message: 'Invalid parameters or table not found' }, 400);
             }
         });
+    } else if (pathname === '/' || pathname === '/health' && req.method === 'GET') {
+        sendJson({ success: true, message: 'Server is running', timestamp: new Date().toISOString() });
     } else {
         sendJson({ success: false, message: 'Not Found' }, 404);
     }
 });
 
-server.listen(PORT, () => {
-    console.log(`Mock server running on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Mock server running on http://0.0.0.0:${PORT}`);
     console.log('OTP Mode: Console Log (1234)');
 });
