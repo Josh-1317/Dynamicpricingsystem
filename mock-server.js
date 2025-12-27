@@ -3,6 +3,8 @@ import url from 'url';
 import fs from 'fs';
 import path from 'path';
 
+console.log('[Mock Server] Starting up...');
+console.log('[Mock Server] Node Version:', process.version);
 const PORT = process.env.PORT || 3001;
 const DB_FILE = process.env.DB_FILE_PATH || 'db.json';
 

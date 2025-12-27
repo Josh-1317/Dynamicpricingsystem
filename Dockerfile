@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# RUN npm install --production
+# Skipped npm install because mock-server.js uses only native modules (http, fs, path)
+# This avoids installing heavy frontend dependencies for the backend container.
 
 COPY . .
 
