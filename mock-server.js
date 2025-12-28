@@ -1,4 +1,5 @@
 import express from 'express';
+console.log('!!! IMMEDIATE STARTUP CHECK: mock-server.js is loading !!!');
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';

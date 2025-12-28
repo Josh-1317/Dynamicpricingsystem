@@ -1,0 +1,4 @@
+provider = "node"
+
+[start]
+cmd = "node mock-server.js"
