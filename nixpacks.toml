@@ -1,5 +1,0 @@
-# Force Railway to use Node.js
-providers = ["node"]
-
-[start]
-cmd = "npm start"
