@@ -2,17 +2,59 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_FILE = process.env.DB_FILE_PATH || 'db.json';
 
-console.log('[Mock Server] Starting up...');
-console.log('[Mock Server] Node Version:', process.version);
+// Structured Logging Helper
+const structuredLog = (level, message, extra = {}) => {
+    const logEntry = {
+        level,
+        message,
+        timestamp: new Date().toISOString(),
+        ...extra
+    };
+    console.log(JSON.stringify(logEntry));
+};
+
+structuredLog('info', 'Mock Server Starting up...');
+structuredLog('info', `Node Version: ${process.version}`);
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Request Logging Middleware
+app.use((req, res, next) => {
+    const requestId = crypto.randomUUID();
+    const startTime = Date.now();
+
+    // Attach ID to request for potential use in downstream logic
+    req.id = requestId;
+
+    structuredLog('info', 'Incoming Request', {
+        requestId,
+        method: req.method,
+        path: req.path,
+        ip: req.ip,
+        userAgent: req.get('user-agent')
+    });
+
+    res.on('finish', () => {
+        const duration = Date.now() - startTime;
+        structuredLog('info', 'Request Completed', {
+            requestId,
+            statusCode: res.statusCode,
+            duration: `${duration}ms`,
+            method: req.method,
+            path: req.path
+        });
+    });
+
+    next();
+});
 
 // Helper to ensure directory exists
 const ensureDirectoryExistence = (filePath) => {
@@ -36,7 +78,7 @@ const loadDB = () => {
             return JSON.parse(data);
         }
     } catch (e) {
-        console.error('Error reading DB:', e);
+        structuredLog('error', 'Error reading DB', { error: e.message });
     }
     return { orders: [] };
 };
@@ -47,8 +89,11 @@ const saveDB = (data) => {
         ensureDirectoryExistence(DB_FILE);
         fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
     } catch (e) {
-        console.error('Error saving DB:', e);
+        structuredLog('error', 'Error saving DB', { error: e.message });
     }
+    // Note: Removed synchronous logging here to avoid spamming logs on every save
+    // or keep it if critical debug is needed:
+    // structuredLog('debug', 'DB Saved');
 };
 
 // Initialize DB in memory
@@ -139,7 +184,11 @@ app.post('/auth/login', (req, res) => {
     const data = req.body;
     if (data.mobile || data.email) {
         const otp = '1234';
-        console.log(`[Mock Auth] OTP for ${data.mobile || data.email}: ${otp}`);
+        structuredLog('info', 'OTP Generated', {
+            otp,
+            identifier: data.mobile || data.email,
+            customAttribute: 'otp_event'
+        });
         res.json({ success: true, message: 'OTP sent (logged to console)', debug_otp: otp });
     } else {
         res.status(400).json({ success: false, message: 'Mobile or Email required' });
@@ -173,6 +222,6 @@ app.post('/auth/verify-otp', (req, res) => {
 
 // Start Server
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Mock server running on http://0.0.0.0:${PORT}`);
-    console.log('OTP Mode: Console Log (1234)');
+    structuredLog('info', `Mock server running on http://0.0.0.0:${PORT}`);
+    structuredLog('info', 'OTP Mode: Console Log (1234)');
 });
