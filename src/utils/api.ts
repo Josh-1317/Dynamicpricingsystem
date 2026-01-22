@@ -1,9 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
-const API_KEY = import.meta.env.VITE_API_KEY;
-
-if (!API_BASE_URL || !API_KEY) {
-  console.warn('Missing API_BASE_URL or VITE_API_KEY in environment variables.');
-}
+const API_KEY = import.meta.env.VITE_API_KEY || 'default-key';
 
 interface ApiResponse<T = any> {
   success: boolean;
