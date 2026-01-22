@@ -88,15 +88,51 @@ const ensureDirectoryExistence = (filePath) => {
 
 // Helper to load DB
 const loadDB = () => {
+    let db = { orders: [], products: [] };
     try {
         if (fs.existsSync(DB_FILE)) {
             const data = fs.readFileSync(DB_FILE, 'utf8');
-            return JSON.parse(data);
+            db = JSON.parse(data);
         }
     } catch (e) {
         structuredLog('error', 'Error reading DB', { error: e.message });
     }
-    return { orders: [] };
+
+    // Seed default products if missing
+    if (!db.products || db.products.length === 0) {
+        db.products = [
+            {
+                id: "prod-1",
+                name: "Premium Steel Rods",
+                description: "High-grade construction steel rods, 12mm diameter",
+                unitOfMeasure: "Ton",
+                category: "Steel Products",
+                imageUrl: "https://images.unsplash.com/photo-1761479867761-7a8b11f54449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGVlbCUyMHJvZHMlMjBjb25zdHJ1Y3Rpb258ZW58MXx8fHwxNzY2MTQxMDg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+                unitPrice: 550
+            },
+            {
+                id: "prod-2",
+                name: "Cement Bags",
+                description: "Portland cement, Grade 53",
+                unitOfMeasure: "Bag (50kg)",
+                category: "Building Materials",
+                imageUrl: "https://images.unsplash.com/photo-1667328951055-43d66e6e87fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjZW1lbnQlMjBiYWdzJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc2NjE0MTA4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+                unitPrice: 8.5
+            },
+            {
+                id: "prod-3",
+                name: "Red Bricks",
+                description: "First class red clay bricks",
+                unitOfMeasure: "Per 1000",
+                category: "Masonry",
+                imageUrl: "https://images.unsplash.com/photo-1614896777839-cdec1a580b0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWQlMjBicmlja3MlMjBzdGFja3xlbnwxfHx8fDE3NjYxNDEwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+                unitPrice: 120
+            }
+        ];
+        saveDB(db);
+    }
+
+    return db;
 };
 
 // Helper to save DB
