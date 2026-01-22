@@ -4,6 +4,10 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -127,9 +131,9 @@ app.get('*', (req, res) => {
     if (!req.path.startsWith('/data') && !req.path.startsWith('/auth')) {
         const indexPath = path.join(__dirname, 'dist', 'index.html');
         if (fs.existsSync(indexPath)) {
-             res.sendFile(indexPath);
+            res.sendFile(indexPath);
         } else {
-             res.status(404).send('Frontend not built. Run "npm run build" first.');
+            res.status(404).send('Frontend not built. Run "npm run build" first.');
         }
     } else {
         res.status(404).json({ success: false, message: 'API route not found' });
