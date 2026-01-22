@@ -8,7 +8,7 @@ import { Separator } from '../ui/separator';
 import {
   CheckCircle,
   Clock,
-  IndianRupee,
+  DollarSign,
   Package,
   Star,
   AlertCircle,
@@ -23,7 +23,7 @@ import { OrderModificationDialog } from './OrderModificationDialog';
 
 const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
   new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: IndianRupee },
+  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
   waiting_approval: { label: 'Awaiting Your Approval', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
   confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
   dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },

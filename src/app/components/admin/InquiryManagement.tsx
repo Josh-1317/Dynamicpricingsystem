@@ -8,7 +8,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Separator } from '../ui/separator';
 import {
-  IndianRupee,
+  DollarSign,
   Send,
   Calendar,
   CheckCircle,
@@ -27,7 +27,7 @@ import { AdminOrderModification } from './AdminOrderModification';
 
 const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
   new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: IndianRupee },
+  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
   waiting_approval: { label: 'Waiting Client', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
   confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
   dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },
@@ -307,7 +307,7 @@ export function InquiryManagement() {
                         {!isPricing ? (
                           <>
                             <Button onClick={() => setSelectedOrder(order.id)} className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                              <IndianRupee className="w-4 h-4 mr-2" />
+                              <DollarSign className="w-4 h-4 mr-2" />
                               Set Pricing
                             </Button>
                             <Button onClick={() => setModifyingOrder(order)} variant="outline" className="border-purple-300 hover:bg-purple-50">
@@ -365,7 +365,7 @@ export function InquiryManagement() {
                           </Button>
                           {order.paymentStatus === 'pending' && (
                             <Button onClick={() => handleMarkPaid(order)} variant="outline" className="flex-1">
-                              <IndianRupee className="w-4 h-4 mr-2" />
+                              <DollarSign className="w-4 h-4 mr-2" />
                               Mark as Paid
                             </Button>
                           )}
@@ -416,7 +416,7 @@ export function InquiryManagement() {
                     {/* Mark Paid for Dispatched Orders */}
                     {order.status === 'dispatched' && order.paymentStatus === 'pending' && (
                       <Button onClick={() => handleMarkPaid(order)} variant="outline" className="w-full">
-                        <IndianRupee className="w-4 h-4 mr-2" />
+                        <DollarSign className="w-4 h-4 mr-2" />
                         Mark Payment as Received
                       </Button>
                     )}
