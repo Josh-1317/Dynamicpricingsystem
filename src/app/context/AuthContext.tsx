@@ -31,7 +31,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             try {
-                setCurrentUser(JSON.parse(storedUser));
+                const parsedUser = JSON.parse(storedUser);
+                // FORCE LOGOUT if using old incomplete ID format (crucial fix for user)
+                if (parsedUser.id.startsWith('user-')) {
+                    console.log('Clearing old session format');
+                    localStorage.removeItem('user');
+                    return;
+                }
+                setCurrentUser(parsedUser);
             } catch (e) {
                 console.error('Failed to parse stored user', e);
                 localStorage.removeItem('user');
