@@ -26,13 +26,18 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-    // useEffect(() => {
-    //     // Check local storage for persistent session
-    //     // const storedUser = localStorage.getItem('user');
-    //     // if (storedUser) {
-    //     //     setCurrentUser(JSON.parse(storedUser));
-    //     // }
-    // }, []);
+    useEffect(() => {
+        // Check local storage for persistent session
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            try {
+                setCurrentUser(JSON.parse(storedUser));
+            } catch (e) {
+                console.error('Failed to parse stored user', e);
+                localStorage.removeItem('user');
+            }
+        }
+    }, []);
 
     const sendOtp = async (mobile: string): Promise<boolean> => {
         try {
@@ -71,21 +76,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     const loginClient = async (name: string, mobile: string): Promise<boolean> => {
-        // Simple login without OTP
-        if (name && mobile) {
+        if (!name || !mobile) {
+            toast.error('Name and Mobile required');
+            return false;
+        }
+
+        try {
+            // Check if client exists
+            // We read all orders/clients to find match (simplified for this architecture)
+            // Ideally we'd have a /clients endpoint, assuming we can search via existing data structure
+            // Since we can't easily access useApp here, we'll try to use a deterministic ID based on mobile for simplified persistence
+            // OR better: search the 'orders' table for this mobile? No, 'clients' table might exist?
+            // Let's use a stable hash or search:
+
+            // Attempt to find client in DB (if stored)
+            // For now, let's just make sure we don't overwrite if we can help it, 
+            // but effectively we need a stable ID. 
+            // Let's use mobile as part of ID to make it semi-stable if we re-login?
+            // Actually, we should try to fetch the client list.
+
+            // Fallback: Generate ID based on mobile number (simple hash)
+            // const stableId = `CLI-${mobile.replace(/\D/g, '')}`; 
+            // But we should try to use the actual DB if possible.
+
             const user: User = {
-                id: 'user-' + Date.now(),
+                id: `CLI-${mobile.replace(/\D/g, '')}`, // Use mobile as stable ID key
                 name: name,
                 role: 'client',
                 mobile: mobile
             };
+
             setCurrentUser(user);
             localStorage.setItem('user', JSON.stringify(user));
             toast.success('Login successful');
             return true;
+        } catch (error) {
+            console.error('Login error', error);
+            return false;
         }
-        toast.error('Name and Mobile required');
-        return false;
     };
 
     const loginAdmin = async (username: string, password: string): Promise<boolean> => {
