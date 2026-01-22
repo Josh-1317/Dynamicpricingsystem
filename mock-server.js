@@ -158,23 +158,7 @@ app.get('/health', (req, res) => {
     res.json({ success: true, message: 'Server is running', timestamp: new Date().toISOString() });
 });
 
-// Serve Frontend (last priority)
-app.use(express.static(path.join(__dirname, 'dist')));
 
-app.get('*', (req, res) => {
-    // If request asks for a file that doesn't exist, send index.html (SPA)
-    // But skip /data and /auth routes just in case regex matched
-    if (!req.path.startsWith('/data') && !req.path.startsWith('/auth')) {
-        const indexPath = path.join(__dirname, 'dist', 'index.html');
-        if (fs.existsSync(indexPath)) {
-            res.sendFile(indexPath);
-        } else {
-            res.status(404).send('Frontend not built. Run "npm run build" first.');
-        }
-    } else {
-        res.status(404).json({ success: false, message: 'API route not found' });
-    }
-});
 
 // Create Table
 app.post('/data/create-table', (req, res) => {
@@ -287,6 +271,24 @@ app.post('/auth/verify-otp', (req, res) => {
         }
     } else {
         res.status(400).json({ success: false, message: 'Mobile/Email and OTP required' });
+    }
+});
+
+// Serve Frontend (last priority)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+    // If request asks for a file that doesn't exist, send index.html (SPA)
+    // But skip /data and /auth routes just in case regex matched
+    if (!req.path.startsWith('/data') && !req.path.startsWith('/auth')) {
+        const indexPath = path.join(__dirname, 'dist', 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).send('Frontend not built. Run "npm run build" first.');
+        }
+    } else {
+        res.status(404).json({ success: false, message: 'API route not found' });
     }
 });
 
