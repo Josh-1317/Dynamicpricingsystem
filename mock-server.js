@@ -37,6 +37,8 @@ process.on('unhandledRejection', (reason, promise) => {
 
 structuredLog('info', 'Mock Server Starting up...');
 structuredLog('info', `Node Version: ${process.version}`);
+structuredLog('info', `Environment PORT: ${process.env.PORT}`);
+
 
 // Middleware
 app.use(cors());
