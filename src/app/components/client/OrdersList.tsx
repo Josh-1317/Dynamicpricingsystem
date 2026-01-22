@@ -5,7 +5,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
-// ... imports ...
+import {
+  CheckCircle,
+  Clock,
+  DollarSign,
+  Package,
+  Star,
+  AlertCircle,
+  Lock,
+  Edit
+} from 'lucide-react';
+import { Order, OrderStatus } from '../../types/order';
+import { format } from 'date-fns';
+import { Textarea } from '../ui/textarea';
+import { toast } from 'sonner';
+import { OrderModificationDialog } from './OrderModificationDialog';
+
+const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
+  new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
+  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
+  waiting_approval: { label: 'Awaiting Your Approval', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
+  confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
+  dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },
+  closed: { label: 'Closed', color: 'bg-gray-100 text-gray-800', icon: CheckCircle }
+};
 
 export function OrdersList() {
   const { orders, updateOrder, addAuditEntry } = useApp();
