@@ -8,7 +8,7 @@ import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
 import { Order } from '../../types/order';
 import {
-  IndianRupee,
+  DollarSign,
   Calendar,
   AlertTriangle,
   CheckCircle,
@@ -249,7 +249,7 @@ export function PaymentTracking() {
       {creditOrders.length === 0 && (
         <Card className="bg-white/90 backdrop-blur-sm">
           <CardContent className="pt-6 text-center py-12">
-            <IndianRupee className="w-12 h-12 mx-auto text-gray-400 mb-4" />
+            <DollarSign className="w-12 h-12 mx-auto text-gray-400 mb-4" />
             <p className="text-gray-600">No pending credit payments to track.</p>
           </CardContent>
         </Card>

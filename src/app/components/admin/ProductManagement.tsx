@@ -199,7 +199,7 @@ export function ProductManagement() {
                                         </TableCell>
                                         <TableCell>{product.unitOfMeasure}</TableCell>
                                         <TableCell className="text-right">
-                                            {product.unitPrice ? `$${product.unitPrice.toFixed(2)}` : '-'}
+                                            {product.unitPrice ? `₹${product.unitPrice.toFixed(2)}` : '-'}
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">
