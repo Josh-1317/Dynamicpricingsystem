@@ -1,0 +1,5 @@
+# Force Railway to use Node.js provider only
+providers = ["node"]
+
+[start]
+cmd = "node mock-server.js"

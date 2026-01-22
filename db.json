@@ -1,0 +1,211 @@
+{
+  "orders": [
+    {
+      "order_id": "ORD-1766682785532",
+      "client_name": "josh",
+      "mobile": "",
+      "status": "closed",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":22,\"subtotal\":22},{\"productId\":\"p2\",\"productName\":\"Cement Bags\",\"quantity\":1,\"unitPrice\":22,\"subtotal\":22}]",
+      "total_amount": 44,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:13:05.533Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $44.00\",\"timestamp\":\"2025-12-25T17:14:20.421Z\"},{\"action\":\"Quote Accepted\",\"user\":\"josh\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:14:50.427Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CASH\",\"timestamp\":\"2025-12-25T17:17:49.843Z\"},{\"action\":\"Payment Received\",\"user\":\"Admin\",\"details\":\"Payment marked as paid\",\"timestamp\":\"2025-12-25T17:17:54.269Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:17:55.788Z\"},{\"action\":\"Goods Received\",\"user\":\"josh\",\"details\":\"Confirmed receipt with 5 stars. Order CLOSED (payment received + goods confirmed)\",\"timestamp\":\"2025-12-25T17:19:17.285Z\"}]",
+      "created_at": "2025-12-25T17:13:05.532Z",
+      "payment_status": "paid",
+      "meta_json": "{\"clientId\":\"CLI-1766682773647\",\"paymentType\":\"cash\",\"rating\":5}",
+      "dispatch_date": "2025-12-25T17:17:55.787Z",
+      "goods_received_date": "2025-12-25T17:19:17.275Z"
+    },
+    {
+      "order_id": "ORD-1766683890929",
+      "client_name": "josh",
+      "mobile": "",
+      "status": "dispatched",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":200,\"subtotal\":200},{\"productId\":\"p2\",\"productName\":\"Cement Bags\",\"quantity\":1,\"unitPrice\":500,\"subtotal\":500},{\"productId\":\"p10\",\"productName\":\"Ceramic Floor Tiles\",\"quantity\":1,\"unitPrice\":600,\"subtotal\":600}]",
+      "total_amount": 1300,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:31:30.929Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $822.00\",\"timestamp\":\"2025-12-25T17:31:43.062Z\"},{\"action\":\"Order Modified\",\"user\":\"josh\",\"details\":\"Updated to 3 item(s)\",\"timestamp\":\"2025-12-25T17:31:57.407Z\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $1300.00\",\"timestamp\":\"2025-12-25T17:32:15.900Z\"},{\"action\":\"Quote Accepted\",\"user\":\"josh\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:32:22.772Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CASH\",\"timestamp\":\"2025-12-25T17:32:29.332Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CREDIT - Due: 2025-02-22\",\"timestamp\":\"2025-12-25T17:32:46.377Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:32:58.334Z\"},{\"action\":\"Goods Received\",\"user\":\"josh\",\"details\":\"Confirmed receipt with 5 stars. Awaiting payment clearance to close order\",\"timestamp\":\"2025-12-25T17:33:11.037Z\"}]",
+      "created_at": "2025-12-25T17:31:30.929Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"CLI-1766682773647\",\"paymentType\":\"credit\",\"paymentDueDate\":\"2025-02-22T00:00:00.000Z\",\"rating\":5,\"feedback\":\"good\"}",
+      "dispatch_date": "2025-12-25T17:32:58.330Z",
+      "goods_received_date": "2025-12-25T17:33:11.033Z"
+    },
+    {
+      "order_id": "ORD-1766684031648",
+      "client_name": "user",
+      "mobile": "",
+      "status": "dispatched",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":500,\"subtotal\":500}]",
+      "total_amount": 500,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:33:51.649Z\",\"action\":\"Order Created\",\"user\":\"user\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $500.00\",\"timestamp\":\"2025-12-25T17:34:07.575Z\"},{\"action\":\"Quote Accepted\",\"user\":\"user\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:34:13.226Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CREDIT - Due: 2025-02-22\",\"timestamp\":\"2025-12-25T17:34:19.145Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:34:21.191Z\"},{\"action\":\"Goods Received\",\"user\":\"user\",\"details\":\"Confirmed receipt with 5 stars. Awaiting payment clearance to close order\",\"timestamp\":\"2025-12-25T17:34:29.641Z\"}]",
+      "created_at": "2025-12-25T17:33:51.648Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"CLI-1766684027266\",\"paymentType\":\"credit\",\"paymentDueDate\":\"2025-02-22T00:00:00.000Z\",\"rating\":5}",
+      "dispatch_date": "2025-12-25T17:34:21.190Z",
+      "goods_received_date": "2025-12-25T17:34:29.639Z"
+    },
+    {
+      "order_id": "TEST-1766740317430",
+      "client_name": "Test Client",
+      "mobile": "1234567890",
+      "status": "new_inquiry",
+      "items_json": "[]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[]",
+      "created_at": "2025-12-26T09:11:57.433Z",
+      "payment_status": "pending",
+      "meta_json": "{}"
+    },
+    {
+      "order_id": "ORD-1766740425296",
+      "client_name": "user",
+      "mobile": "12344444567",
+      "status": "new_inquiry",
+      "items_json": "[{\"productId\":\"prod-1766739340460-857k1sqon\",\"productName\":\"Aggregate Stone\",\"quantity\":1}]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2025-12-26T09:13:45.296Z\",\"action\":\"Order Created\",\"user\":\"user\",\"details\":\"Initial inquiry submitted\"}]",
+      "created_at": "2025-12-26T09:13:45.296Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1766740421861\"}"
+    },
+    {
+      "order_id": "ORD-1769095414738",
+      "client_name": "josh",
+      "mobile": "1234567890",
+      "status": "new_inquiry",
+      "items_json": "[{\"productId\":\"prod-1766739340381-1z0k2bmy3\",\"productName\":\"Cement Bags\",\"quantity\":2},{\"productId\":\"prod-1766739340283-hxfh9kw9n\",\"productName\":\"Premium Steel Rods\",\"quantity\":1}]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2026-01-22T15:23:34.738Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"}]",
+      "created_at": "2026-01-22T15:23:34.738Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1769095220490\"}"
+    },
+    {
+      "order_id": "ORD-1769095814885",
+      "client_name": "Test Client",
+      "mobile": "9999999999",
+      "status": "waiting_approval",
+      "items_json": "[{\"productId\":\"prod-1766739340283-hxfh9kw9n\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":10,\"subtotal\":10}]",
+      "total_amount": 10,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2026-01-22T15:30:14.885Z\",\"action\":\"Order Created\",\"user\":\"Test Client\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $10.00\",\"timestamp\":\"2026-01-22T15:37:31.916Z\"}]",
+      "created_at": "2026-01-22T15:30:14.885Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1769095760671\"}"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1766739340283-hxfh9kw9n",
+      "name": "Premium Steel Rods",
+      "description": "High-grade construction steel rods, 12mm diameter",
+      "unitOfMeasure": "Ton",
+      "category": "Steel Products",
+      "imageUrl": "https://images.unsplash.com/photo-1761479867761-7a8b11f54449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGVlbCUyMHJvZHMlMjBjb25zdHJ1Y3Rpb258ZW58MXx8fHwxNzY2MTQxMDg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 450
+    },
+    {
+      "id": "prod-1766739340381-1z0k2bmy3",
+      "name": "Cement Bags",
+      "description": "Portland cement, Grade 53",
+      "unitOfMeasure": "Bag (50kg)",
+      "category": "Building Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1667328951055-43d66e6e87fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjZW1lbnQlMjBiYWdzJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc2NjE0MTA4OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 8.5
+    },
+    {
+      "id": "prod-1766739340460-857k1sqon",
+      "name": "Aggregate Stone",
+      "description": "20mm crushed aggregate for concrete",
+      "unitOfMeasure": "Cubic Meter",
+      "category": "Aggregates",
+      "imageUrl": "https://images.unsplash.com/photo-1758642367525-56ed355d0bfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcnVzaGVkJTIwc3RvbmUlMjBhZ2dyZWdhdGV8ZW58MXx8fHwxNzY2MTQxMDg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 45
+    },
+    {
+      "id": "prod-1766739340477-p4lte4nne",
+      "name": "Sand (River)",
+      "description": "Washed river sand for construction",
+      "unitOfMeasure": "Cubic Meter",
+      "category": "Aggregates",
+      "imageUrl": "https://images.unsplash.com/photo-1686358244601-f6e65f67d4c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYW5kJTIwcGlsZSUyMGNvbnN0cnVjdGlvbnxlbnwxfHx8fDE3NjYxNDEwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 35
+    },
+    {
+      "id": "prod-1766739340496-mf6hhs4dd",
+      "name": "Bricks (Red)",
+      "description": "First class red clay bricks",
+      "unitOfMeasure": "Per 1000",
+      "category": "Masonry",
+      "imageUrl": "https://images.unsplash.com/photo-1614896777839-cdec1a580b0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWQlMjBicmlja3MlMjBzdGFja3xlbnwxfHx8fDE3NjYxNDEwODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 120
+    },
+    {
+      "id": "prod-1766739340514-k5hzt6pmj",
+      "name": "Concrete Blocks",
+      "description": "6 inch hollow concrete blocks",
+      "unitOfMeasure": "Per 100",
+      "category": "Masonry",
+      "imageUrl": "https://images.unsplash.com/photo-1559226747-74d0ca875bea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMGJsb2NrcyUyMG1hc29ucnl8ZW58MXx8fHwxNzY2MTQxMDg5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 85
+    },
+    {
+      "id": "prod-1766739340540-tdm2hrs96",
+      "name": "Industrial Paint",
+      "description": "Weather-resistant exterior paint, all colors",
+      "unitOfMeasure": "Liter",
+      "category": "Paints & Coatings",
+      "imageUrl": "https://images.unsplash.com/photo-1763741226847-f5ef0c846506?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBpbmR1c3RyaWFsfGVufDF8fHx8MTc2NjE0MTA5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 15
+    },
+    {
+      "id": "prod-1766739340578-ul8yfj45s",
+      "name": "Electrical Wires",
+      "description": "Copper electrical wires, 2.5mm HOUSE wire",
+      "unitOfMeasure": "Meter",
+      "category": "Electrical",
+      "imageUrl": "https://images.unsplash.com/photo-1563068261-13ebbdf16aa3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwd2lyZXMlMjBjYWJsZXN8ZW58MXx8fHwxNzY2MTQxMDkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 2.5
+    },
+    {
+      "id": "prod-1766739340600-lhjx1dyxk",
+      "name": "PVC Pipes",
+      "description": "Schedule 40 PVC pipes for plumbing",
+      "unitOfMeasure": "Piece (10ft)",
+      "category": "Plumbing",
+      "imageUrl": "https://images.unsplash.com/photo-1737574990049-264694ce17a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwbHVtYmluZyUyMHBpcGVzJTIwcHZjfGVufDF8fHx8MTc2NjE0MTA5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 12
+    },
+    {
+      "id": "prod-1766739340619-g8r1zjxjp",
+      "name": "Ceramic Floor Tiles",
+      "description": "Premium ceramic tiles, 600x600mm",
+      "unitOfMeasure": "Square Meter",
+      "category": "Tiles",
+      "imageUrl": "https://images.unsplash.com/photo-1695191388218-f6259600223f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjZXJhbWljJTIwdGlsZXMlMjBmbG9vcnxlbnwxfHx8fDE3NjYxNDEwOTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 25
+    },
+    {
+      "id": "prod-1766739340641-gdxkugsk9",
+      "name": "Timber Planks",
+      "description": "Treated hardwood timber planks",
+      "unitOfMeasure": "Cubic Foot",
+      "category": "Timber",
+      "imageUrl": "https://images.unsplash.com/photo-1715534408885-b9e45db5fc13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b29kJTIwdGltYmVyJTIwcGxhbmtzfGVufDF8fHx8MTc2NjE0MTA5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 18
+    },
+    {
+      "id": "prod-1766739340663-yvftas5j7",
+      "name": "Glass Panels",
+      "description": "Tempered glass panels for windows and doors",
+      "unitOfMeasure": "Square Foot",
+      "category": "Glass & Windows",
+      "imageUrl": "https://images.unsplash.com/photo-1654072758089-bdac254f4f90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnbGFzcyUyMHBhbmVscyUyMHdpbmRvd3N8ZW58MXx8fHwxNzY2MTQxMDkyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "unitPrice": 40
+    }
+  ]
+}
