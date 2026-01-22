@@ -12,7 +12,8 @@ COPY . .
 RUN npm run build
 
 # ENV PORT=3000 (Let Platform set this)
-EXPOSE 3000
+# EXPOSE (Removed to let Platform manage ports)
+
 
 
 CMD ["node", "mock-server.js"]
