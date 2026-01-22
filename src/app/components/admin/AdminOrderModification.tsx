@@ -7,7 +7,7 @@ import { Input } from '../ui/input';
 import { Badge } from '../ui/badge';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Plus, Trash2, Save, X, DollarSign } from 'lucide-react';
+import { Plus, Trash2, Save, X, IndianRupee } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface AdminOrderModificationProps {
@@ -108,7 +108,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
     addAuditEntry(order.id, {
       action: 'Order Items Modified by Admin',
       user: 'Admin',
-      details: `Updated to ${validItems.length} item(s), Total: $${total.toFixed(2)}`
+      details: `Updated to ${validItems.length} item(s), Total: ₹${total.toFixed(2)}`
     });
 
     toast.success('Order updated. Client will review the changes.');
@@ -162,7 +162,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
                     <div className="flex items-center gap-2">
                       <Label className="text-sm text-gray-600">Price:</Label>
                       <div className="relative">
-                        <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                        <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                         <Input
                           type="number"
                           value={item.unitPrice || ''}
@@ -179,7 +179,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
                     <div className="w-28 text-right">
                       <span className="text-sm text-gray-600">Subtotal:</span>
                       <p className="font-medium text-green-700">
-                        ${(item.subtotal || 0).toFixed(2)}
+                        ₹{(item.subtotal || 0).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -249,7 +249,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
             <div className="flex items-center justify-between">
               <span className="font-medium text-blue-900">Order Total:</span>
               <span className="font-bold text-2xl text-blue-700">
-                ${total.toFixed(2)}
+                ₹{total.toFixed(2)}
               </span>
             </div>
           </div>

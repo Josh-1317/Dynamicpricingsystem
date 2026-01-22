@@ -8,7 +8,7 @@ import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Separator } from '../ui/separator';
 import {
-  DollarSign,
+  IndianRupee,
   Send,
   Calendar,
   CheckCircle,
@@ -27,7 +27,7 @@ import { AdminOrderModification } from './AdminOrderModification';
 
 const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
   new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
+  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: IndianRupee },
   waiting_approval: { label: 'Waiting Client', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
   confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
   dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },
@@ -80,7 +80,7 @@ export function InquiryManagement() {
     addAuditEntry(order.id, {
       action: 'Pricing Set',
       user: 'Admin',
-      details: `Total: $${total.toFixed(2)}`
+      details: `Total: ₹${total.toFixed(2)}`
     });
 
     setPrices(new Map());
@@ -270,20 +270,20 @@ export function InquiryManagement() {
                                   />
                                   {prices.get(item.productId) && (
                                     <span className="text-sm font-medium">
-                                      = ${(prices.get(item.productId)! * item.quantity).toFixed(2)}
+                                      = ₹{(prices.get(item.productId)! * item.quantity).toFixed(2)}
                                     </span>
                                   )}
                                 </div>
                                 {isPricing && (
                                   <div className="text-xs text-gray-500">
-                                    Catalog Price: ${getCatalogPrice(item.productId, item.productName).toFixed(2)}
+                                    Catalog Price: ₹{getCatalogPrice(item.productId, item.productName).toFixed(2)}
                                   </div>
                                 )}
                               </div>
                             ) : item.unitPrice ? (
                               <div className="flex items-center gap-4">
-                                <span className="text-sm text-gray-600">@ ${item.unitPrice.toFixed(2)}</span>
-                                <span className="font-medium">${item.subtotal?.toFixed(2)}</span>
+                                <span className="text-sm text-gray-600">@ ₹{item.unitPrice.toFixed(2)}</span>
+                                <span className="font-medium">₹{item.subtotal?.toFixed(2)}</span>
                               </div>
                             ) : (
                               <Badge variant="secondary">Awaiting Price</Badge>
@@ -297,7 +297,7 @@ export function InquiryManagement() {
                     {order.totalAmount && (
                       <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
                         <span className="font-medium">Total Order Value</span>
-                        <span className="font-bold text-xl">${order.totalAmount.toFixed(2)}</span>
+                        <span className="font-bold text-xl">₹{order.totalAmount.toFixed(2)}</span>
                       </div>
                     )}
 
@@ -307,7 +307,7 @@ export function InquiryManagement() {
                         {!isPricing ? (
                           <>
                             <Button onClick={() => setSelectedOrder(order.id)} className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                              <DollarSign className="w-4 h-4 mr-2" />
+                              <IndianRupee className="w-4 h-4 mr-2" />
                               Set Pricing
                             </Button>
                             <Button onClick={() => setModifyingOrder(order)} variant="outline" className="border-purple-300 hover:bg-purple-50">
@@ -365,7 +365,7 @@ export function InquiryManagement() {
                           </Button>
                           {order.paymentStatus === 'pending' && (
                             <Button onClick={() => handleMarkPaid(order)} variant="outline" className="flex-1">
-                              <DollarSign className="w-4 h-4 mr-2" />
+                              <IndianRupee className="w-4 h-4 mr-2" />
                               Mark as Paid
                             </Button>
                           )}
@@ -416,7 +416,7 @@ export function InquiryManagement() {
                     {/* Mark Paid for Dispatched Orders */}
                     {order.status === 'dispatched' && order.paymentStatus === 'pending' && (
                       <Button onClick={() => handleMarkPaid(order)} variant="outline" className="w-full">
-                        <DollarSign className="w-4 h-4 mr-2" />
+                        <IndianRupee className="w-4 h-4 mr-2" />
                         Mark Payment as Received
                       </Button>
                     )}

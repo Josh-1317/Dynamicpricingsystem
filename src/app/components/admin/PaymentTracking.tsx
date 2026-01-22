@@ -7,11 +7,11 @@ import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
 import { Order } from '../../types/order';
-import { 
-  DollarSign, 
-  Calendar, 
-  AlertTriangle, 
-  CheckCircle, 
+import {
+  IndianRupee,
+  Calendar,
+  AlertTriangle,
+  CheckCircle,
   Clock,
   Bell,
   BellOff,
@@ -26,8 +26,8 @@ export function PaymentTracking() {
   const [newReminderDate, setNewReminderDate] = useState('');
 
   // Get orders with payment terms
-  const creditOrders = orders.filter(o => 
-    o.paymentType === 'credit' && 
+  const creditOrders = orders.filter(o =>
+    o.paymentType === 'credit' &&
     o.paymentStatus === 'pending' &&
     o.status !== 'closed'
   );
@@ -37,12 +37,12 @@ export function PaymentTracking() {
 
   const getPaymentStatus = (order: Order) => {
     if (!order.paymentDueDate) return 'no-date';
-    
+
     const dueDate = new Date(order.paymentDueDate);
     dueDate.setHours(0, 0, 0, 0);
-    
-    const reminderDate = order.paymentReminderDate 
-      ? new Date(order.paymentReminderDate) 
+
+    const reminderDate = order.paymentReminderDate
+      ? new Date(order.paymentReminderDate)
       : dueDate;
     reminderDate.setHours(0, 0, 0, 0);
 
@@ -58,16 +58,16 @@ export function PaymentTracking() {
   const handleMarkPaid = (order: Order) => {
     // Auto-close order if BOTH payment is paid AND goods are received
     const shouldClose = !!order.goodsReceivedDate;
-    
+
     updateOrder(order.id, {
       paymentStatus: 'paid',
       status: shouldClose ? 'closed' : order.status
     });
-    
+
     addAuditEntry(order.id, {
       action: 'Payment Received',
       user: 'Admin',
-      details: `Payment marked as PAID. Amount: $${order.totalAmount?.toFixed(2)}. ${shouldClose ? 'Order CLOSED (payment + goods both confirmed)' : 'Awaiting goods receipt confirmation to close order'}`
+      details: `Payment marked as PAID. Amount: ₹${order.totalAmount?.toFixed(2)}. ${shouldClose ? 'Order CLOSED (payment + goods both confirmed)' : 'Awaiting goods receipt confirmation to close order'}`
     });
 
     if (shouldClose) {
@@ -78,16 +78,16 @@ export function PaymentTracking() {
   };
 
   const handleSnoozeReminder = (order: Order, days: number) => {
-    const currentReminder = order.paymentReminderDate 
+    const currentReminder = order.paymentReminderDate
       ? new Date(order.paymentReminderDate)
       : new Date(order.paymentDueDate!);
-    
+
     const newDate = addDays(currentReminder, days);
-    
+
     updateOrder(order.id, {
       paymentReminderDate: newDate
     });
-    
+
     addAuditEntry(order.id, {
       action: 'Payment Reminder Snoozed',
       user: 'Admin',
@@ -104,11 +104,11 @@ export function PaymentTracking() {
     }
 
     const newDate = new Date(newReminderDate);
-    
+
     updateOrder(order.id, {
       paymentReminderDate: newDate
     });
-    
+
     addAuditEntry(order.id, {
       action: 'Payment Due Date Extended',
       user: 'Admin',
@@ -177,9 +177,9 @@ export function PaymentTracking() {
           </h3>
           <div className="space-y-3">
             {overdueOrders.map(order => (
-              <PaymentCard 
-                key={order.id} 
-                order={order} 
+              <PaymentCard
+                key={order.id}
+                order={order}
                 status="overdue"
                 onMarkPaid={handleMarkPaid}
                 onSnooze={handleSnoozeReminder}
@@ -203,9 +203,9 @@ export function PaymentTracking() {
           </h3>
           <div className="space-y-3">
             {todayOrders.map(order => (
-              <PaymentCard 
-                key={order.id} 
-                order={order} 
+              <PaymentCard
+                key={order.id}
+                order={order}
                 status="today"
                 onMarkPaid={handleMarkPaid}
                 onSnooze={handleSnoozeReminder}
@@ -229,9 +229,9 @@ export function PaymentTracking() {
           </h3>
           <div className="space-y-3">
             {upcomingOrders.map(order => (
-              <PaymentCard 
-                key={order.id} 
-                order={order} 
+              <PaymentCard
+                key={order.id}
+                order={order}
                 status="upcoming"
                 onMarkPaid={handleMarkPaid}
                 onSnooze={handleSnoozeReminder}
@@ -249,7 +249,7 @@ export function PaymentTracking() {
       {creditOrders.length === 0 && (
         <Card className="bg-white/90 backdrop-blur-sm">
           <CardContent className="pt-6 text-center py-12">
-            <DollarSign className="w-12 h-12 mx-auto text-gray-400 mb-4" />
+            <IndianRupee className="w-12 h-12 mx-auto text-gray-400 mb-4" />
             <p className="text-gray-600">No pending credit payments to track.</p>
           </CardContent>
         </Card>
@@ -282,7 +282,7 @@ function PaymentCard({
   setNewReminderDate
 }: PaymentCardProps) {
   const isEditing = editingReminder === order.id;
-  
+
   const statusConfig = {
     overdue: {
       bg: 'from-red-50 to-red-100',
@@ -325,7 +325,7 @@ function PaymentCard({
               <p className="text-sm text-gray-700">Client: {order.clientName}</p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-green-700">${order.totalAmount?.toFixed(2)}</p>
+              <p className="text-2xl font-bold text-green-700">₹{order.totalAmount?.toFixed(2)}</p>
             </div>
           </div>
 
@@ -348,31 +348,31 @@ function PaymentCard({
 
           {!isEditing ? (
             <div className="flex gap-2">
-              <Button 
-                onClick={() => onMarkPaid(order)} 
+              <Button
+                onClick={() => onMarkPaid(order)}
                 className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
               >
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Mark as Paid
               </Button>
-              <Button 
-                onClick={() => onSnooze(order, 3)} 
+              <Button
+                onClick={() => onSnooze(order, 3)}
                 variant="outline"
                 className="border-amber-400 hover:bg-amber-50"
               >
                 <BellOff className="w-4 h-4 mr-2" />
                 Snooze 3 Days
               </Button>
-              <Button 
-                onClick={() => onSnooze(order, 7)} 
+              <Button
+                onClick={() => onSnooze(order, 7)}
                 variant="outline"
                 className="border-blue-400 hover:bg-blue-50"
               >
                 <BellOff className="w-4 h-4 mr-2" />
                 Snooze 7 Days
               </Button>
-              <Button 
-                onClick={() => setEditingReminder(order.id)} 
+              <Button
+                onClick={() => setEditingReminder(order.id)}
                 variant="outline"
                 className="border-purple-400 hover:bg-purple-50"
               >
@@ -391,15 +391,15 @@ function PaymentCard({
                   className="flex-1"
                   min={format(new Date(), 'yyyy-MM-dd')}
                 />
-                <Button 
+                <Button
                   onClick={() => onExtend(order)}
                   className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
                   Update
                 </Button>
-                <Button 
-                  onClick={() => setEditingReminder(null)} 
+                <Button
+                  onClick={() => setEditingReminder(null)}
                   variant="outline"
                 >
                   Cancel

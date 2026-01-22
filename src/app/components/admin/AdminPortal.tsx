@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { InquiryManagement } from './InquiryManagement';
 import { PaymentTracking } from './PaymentTracking';
 import { ProductManagement } from './ProductManagement';
-import { LogOut, LayoutDashboard, FileText, DollarSign, Package } from 'lucide-react';
+import { LogOut, LayoutDashboard, FileText, IndianRupee, Package } from 'lucide-react';
 
 export function AdminPortal() {
   const { orders } = useApp();
@@ -88,7 +88,7 @@ export function AdminPortal() {
                 Master Catalog
               </TabsTrigger>
               <TabsTrigger value="payments">
-                <DollarSign className="w-4 h-4 mr-2" />
+                <IndianRupee className="w-4 h-4 mr-2" />
                 Payment Tracking
                 {pendingPayments > 0 && (
                   <span className="ml-2 px-2 py-0.5 bg-amber-500 text-white rounded-full text-xs">

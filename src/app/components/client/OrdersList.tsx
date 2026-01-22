@@ -8,7 +8,7 @@ import { Separator } from '../ui/separator';
 import {
   CheckCircle,
   Clock,
-  DollarSign,
+  IndianRupee,
   Package,
   Star,
   AlertCircle,
@@ -23,7 +23,7 @@ import { OrderModificationDialog } from './OrderModificationDialog';
 
 const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
   new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
+  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: IndianRupee },
   waiting_approval: { label: 'Awaiting Your Approval', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
   confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
   dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },
@@ -143,10 +143,10 @@ export function OrdersList() {
                           {item.unitPrice && (
                             <>
                               <span className="text-sm text-gray-600">
-                                @ ${item.unitPrice.toFixed(2)}
+                                @ ₹{item.unitPrice.toFixed(2)}
                               </span>
                               <span className="font-medium text-green-700">
-                                ${item.subtotal?.toFixed(2)}
+                                ₹{item.subtotal?.toFixed(2)}
                               </span>
                             </>
                           )}
@@ -160,7 +160,7 @@ export function OrdersList() {
                 {order.totalAmount && (
                   <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg border-2 border-blue-300">
                     <span className="font-medium">Total Order Value</span>
-                    <span className="font-bold text-2xl text-blue-700">${order.totalAmount.toFixed(2)}</span>
+                    <span className="font-bold text-2xl text-blue-700">₹{order.totalAmount.toFixed(2)}</span>
                   </div>
                 )}
 
