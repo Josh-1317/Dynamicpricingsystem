@@ -304,10 +304,11 @@ app.get('*', (req, res) => {
 });
 
 // Start Server
-const server = app.listen(PORT, () => {
-    structuredLog('info', `Mock server running on port ${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+    structuredLog('info', `Mock server running on http://0.0.0.0:${PORT}`);
     structuredLog('info', 'OTP Mode: Console Log (1234)');
 });
+
 
 server.on('error', (error) => {
     structuredLog('error', 'Server failed to start', { error: error.message, stack: error.stack });

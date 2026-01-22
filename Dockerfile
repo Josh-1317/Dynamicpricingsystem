@@ -16,4 +16,6 @@ RUN npm run build
 
 
 
-CMD ["node", "mock-server.js"]
+ENV HOST=0.0.0.0
+CMD ["npm", "start"]
+
