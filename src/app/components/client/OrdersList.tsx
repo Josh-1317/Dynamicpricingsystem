@@ -1,36 +1,15 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { useAuth } from '../../context/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
-import { 
-  CheckCircle, 
-  Clock, 
-  DollarSign, 
-  Package, 
-  Star,
-  AlertCircle,
-  Lock,
-  Edit
-} from 'lucide-react';
-import { Order, OrderStatus } from '../../types/order';
-import { format } from 'date-fns';
-import { Textarea } from '../ui/textarea';
-import { toast } from 'sonner';
-import { OrderModificationDialog } from './OrderModificationDialog';
-
-const statusConfig: Record<OrderStatus, { label: string; color: string; icon: any }> = {
-  new_inquiry: { label: 'New Inquiry', color: 'bg-blue-100 text-blue-800', icon: Clock },
-  pending_pricing: { label: 'Pending Pricing', color: 'bg-yellow-100 text-yellow-800', icon: DollarSign },
-  waiting_approval: { label: 'Awaiting Your Approval', color: 'bg-purple-100 text-purple-800', icon: AlertCircle },
-  confirmed: { label: 'Confirmed', color: 'bg-green-100 text-green-800', icon: CheckCircle },
-  dispatched: { label: 'Dispatched', color: 'bg-indigo-100 text-indigo-800', icon: Package },
-  closed: { label: 'Closed', color: 'bg-gray-100 text-gray-800', icon: CheckCircle }
-};
+// ... imports ...
 
 export function OrdersList() {
-  const { orders, currentUser, updateOrder, addAuditEntry } = useApp();
+  const { orders, updateOrder, addAuditEntry } = useApp();
+  const { currentUser } = useAuth();
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [modifyingOrder, setModifyingOrder] = useState<Order | null>(null);
   const [rating, setRating] = useState(0);
@@ -39,7 +18,7 @@ export function OrdersList() {
   const clientOrders = orders.filter(o => o.clientId === currentUser?.id);
 
   const handleAcceptQuote = (order: Order) => {
-    updateOrder(order.id, { 
+    updateOrder(order.id, {
       status: 'confirmed',
       isLocked: true
     });
@@ -66,7 +45,7 @@ export function OrdersList() {
       feedback,
       status: shouldClose ? 'closed' : order.status
     });
-    
+
     addAuditEntry(order.id, {
       action: 'Goods Received',
       user: currentUser?.name || 'Client',
@@ -78,7 +57,7 @@ export function OrdersList() {
     } else {
       toast.success('Thank you for confirming receipt! Order will close once payment is cleared.');
     }
-    
+
     setRating(0);
     setFeedback('');
   };
@@ -230,16 +209,16 @@ export function OrdersList() {
                 <div className="flex gap-2 pt-2">
                   {order.status === 'waiting_approval' && !order.isLocked && (
                     <>
-                      <Button 
-                        onClick={() => handleAcceptQuote(order)} 
+                      <Button
+                        onClick={() => handleAcceptQuote(order)}
                         className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <CheckCircle className="w-4 h-4 mr-2" />
                         Accept Quote
                       </Button>
-                      <Button 
-                        onClick={() => setModifyingOrder(order)} 
-                        variant="outline" 
+                      <Button
+                        onClick={() => setModifyingOrder(order)}
+                        variant="outline"
                         className="flex-1 border-blue-300 hover:bg-blue-50"
                       >
                         <Edit className="w-4 h-4 mr-2" />
@@ -260,9 +239,8 @@ export function OrdersList() {
                             className="focus:outline-none transition-transform hover:scale-110"
                           >
                             <Star
-                              className={`w-8 h-8 ${
-                                star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
-                              }`}
+                              className={`w-8 h-8 ${star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                                }`}
                             />
                           </button>
                         ))}
@@ -274,8 +252,8 @@ export function OrdersList() {
                         rows={3}
                         className="bg-white"
                       />
-                      <Button 
-                        onClick={() => handleConfirmReceipt(order)} 
+                      <Button
+                        onClick={() => handleConfirmReceipt(order)}
                         className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
                       >
                         <CheckCircle className="w-4 h-4 mr-2" />
@@ -296,7 +274,7 @@ export function OrdersList() {
                     >
                       {isExpanded ? 'Hide' : 'Show'} Activity Log
                     </Button>
-                    
+
                     {isExpanded && (
                       <div className="mt-3 space-y-2">
                         {order.auditLog.map((entry, idx) => (
