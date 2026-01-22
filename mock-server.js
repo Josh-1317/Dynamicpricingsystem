@@ -275,7 +275,16 @@ app.post('/auth/verify-otp', (req, res) => {
 });
 
 // Serve Frontend (last priority)
-app.use(express.static(path.join(__dirname, 'dist')));
+const distPath = path.join(__dirname, 'dist');
+if (fs.existsSync(distPath)) {
+    structuredLog('info', 'Serving frontend from dist', {
+        files: fs.readdirSync(distPath)
+    });
+} else {
+    structuredLog('error', 'DIST FOLDER MISSING - Build failed or path incorrect');
+}
+
+app.use(express.static(distPath));
 
 app.get('*', (req, res) => {
     // If request asks for a file that doesn't exist, send index.html (SPA)
