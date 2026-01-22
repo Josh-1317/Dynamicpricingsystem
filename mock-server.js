@@ -20,6 +20,17 @@ const structuredLog = (level, message, extra = {}) => {
     console.log(JSON.stringify(logEntry));
 };
 
+
+// Use explicit error handling for process events
+process.on('uncaughtException', (err) => {
+    structuredLog('error', 'Uncaught Exception', { error: err.message, stack: err.stack });
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    structuredLog('error', 'Unhandled Rejection', { reason: reason instanceof Error ? reason.message : reason });
+});
+
 structuredLog('info', 'Mock Server Starting up...');
 structuredLog('info', `Node Version: ${process.version}`);
 
