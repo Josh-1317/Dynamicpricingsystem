@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
@@ -140,7 +140,7 @@ export function OrdersList() {
                         </div>
                         <div className="flex items-center gap-4">
                           <Badge variant="outline" className="bg-white">
-                            Qty: {item.quantity} kg
+                            Qty: {item.quantity} {item.kg ? `(${item.kg} kg)` : ''}
                           </Badge>
                           {item.unitPrice && (
                             <>

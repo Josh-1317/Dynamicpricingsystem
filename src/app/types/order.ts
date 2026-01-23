@@ -25,6 +25,7 @@ export interface OrderItem {
   productId: string;
   productName: string;
   quantity: number;
+  kg?: number;
   unitPrice?: number;
   subtotal?: number;
 }

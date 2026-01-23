@@ -12,18 +12,21 @@ import { toast } from 'sonner';
 export function CatalogBrowser() {
   const { products, addOrder } = useApp();
   const { currentUser } = useAuth();
-  const [cart, setCart] = useState<Map<string, number>>(new Map());
+  // Map<productId, { quantity: number, kg: number }>
+  const [cart, setCart] = useState<Map<string, { quantity: number, kg: number }>>(new Map());
 
-  const updateQuantity = (productId: string, delta: number) => {
+  const updateCartItem = (productId: string, updates: { quantity?: number, kg?: number }) => {
     setCart(prev => {
       const newCart = new Map(prev);
-      const current = newCart.get(productId) || 0;
-      const newQuantity = Math.max(0, current + delta);
+      const current = newCart.get(productId) || { quantity: 0, kg: 0 };
 
-      if (newQuantity === 0) {
+      const newQuantity = updates.quantity !== undefined ? Math.max(0, updates.quantity) : current.quantity;
+      const newKg = updates.kg !== undefined ? Math.max(0, updates.kg) : current.kg;
+
+      if (newQuantity === 0 && newKg === 0) {
         newCart.delete(productId);
       } else {
-        newCart.set(productId, newQuantity);
+        newCart.set(productId, { quantity: newQuantity, kg: newKg });
       }
 
       return newCart;
@@ -43,12 +46,13 @@ export function CatalogBrowser() {
 
     console.log('Submitting inquiry for:', currentUser);
 
-    const items: OrderItem[] = Array.from(cart.entries()).map(([productId, quantity]) => {
+    const items: OrderItem[] = Array.from(cart.entries()).map(([productId, data]) => {
       const product = products.find(p => p.id === productId)!;
       return {
         productId,
         productName: product.name,
-        quantity
+        quantity: data.quantity,
+        kg: data.kg
       };
     });
 
@@ -71,7 +75,7 @@ export function CatalogBrowser() {
     }
   };
 
-  const totalItems = Array.from(cart.values()).reduce((sum, qty) => sum + qty, 0);
+  const totalItems = Array.from(cart.values()).reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="space-y-6">
@@ -96,7 +100,8 @@ export function CatalogBrowser() {
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.map(product => {
-            const quantity = cart.get(product.id) || 0;
+            const cartItem = cart.get(product.id);
+            const quantity = cartItem?.quantity || 0;
 
             return (
               <Card key={product.id} className="hover:shadow-2xl transition-all duration-300 bg-white/90 backdrop-blur-sm border-2 hover:border-blue-300 overflow-hidden">
@@ -142,7 +147,7 @@ export function CatalogBrowser() {
                     <div className="flex items-center justify-between gap-2">
                       {quantity === 0 ? (
                         <Button
-                          onClick={() => updateQuantity(product.id, 1)}
+                          onClick={() => updateCartItem(product.id, { quantity: 1 })}
                           variant="default"
                           className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
                         >
@@ -150,43 +155,65 @@ export function CatalogBrowser() {
                           Add to Inquiry
                         </Button>
                       ) : (
-                        <div className="flex items-center justify-between mt-4">
-                          <span className="text-sm font-medium text-gray-700">Quantity (kg)</span>
-                          <div className="flex items-center gap-2">
-                            <Button
-                              onClick={() => updateQuantity(product.id, -1)}
-                              variant="outline"
-                              size="icon"
-                              className="w-8 h-8 border-blue-300 hover:bg-blue-50"
-                            >
-                              <Minus className="w-4 h-4" />
-                            </Button>
-                            <Input
-                              type="number"
-                              value={quantity}
-                              onChange={(e) => {
-                                const newQty = parseInt(e.target.value) || 0;
-                                setCart(prev => {
-                                  const newCart = new Map(prev);
-                                  if (newQty === 0) {
-                                    newCart.delete(product.id);
-                                  } else {
-                                    newCart.set(product.id, newQty);
-                                  }
-                                  return newCart;
-                                });
-                              }}
-                              className="w-20 text-center bg-white h-8"
-                              min="0"
-                            />
-                            <Button
-                              onClick={() => updateQuantity(product.id, 1)}
-                              variant="outline"
-                              size="icon"
-                              className="w-8 h-8 border-blue-300 hover:bg-blue-50"
-                            >
-                              <Plus className="w-4 h-4" />
-                            </Button>
+                        <div className="space-y-3 mt-4">
+                          {/* Quantity Control */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-gray-700">Quantity</span>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                onClick={() => updateCartItem(product.id, { quantity: (cart.get(product.id)?.quantity || 0) - 1 })}
+                                variant="outline"
+                                size="icon"
+                                className="w-8 h-8 border-blue-300 hover:bg-blue-50"
+                              >
+                                <Minus className="w-4 h-4" />
+                              </Button>
+                              <Input
+                                type="number"
+                                value={cart.get(product.id)?.quantity || 0}
+                                onChange={(e) => updateCartItem(product.id, { quantity: parseInt(e.target.value) || 0 })}
+                                className="w-20 text-center bg-white h-8"
+                                min="0"
+                              />
+                              <Button
+                                onClick={() => updateCartItem(product.id, { quantity: (cart.get(product.id)?.quantity || 0) + 1 })}
+                                variant="outline"
+                                size="icon"
+                                className="w-8 h-8 border-blue-300 hover:bg-blue-50"
+                              >
+                                <Plus className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+
+                          {/* Weight (kg) Control */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-gray-700">Weight (kg)</span>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                onClick={() => updateCartItem(product.id, { kg: Math.max(0, (cart.get(product.id)?.kg || 0) - 1) })}
+                                variant="outline"
+                                size="icon"
+                                className="w-8 h-8 border-blue-300 hover:bg-blue-50"
+                              >
+                                <Minus className="w-4 h-4" />
+                              </Button>
+                              <Input
+                                type="number"
+                                value={cart.get(product.id)?.kg || 0}
+                                onChange={(e) => updateCartItem(product.id, { kg: parseFloat(e.target.value) || 0 })}
+                                className="w-20 text-center bg-white h-8"
+                                min="0"
+                              />
+                              <Button
+                                onClick={() => updateCartItem(product.id, { kg: (cart.get(product.id)?.kg || 0) + 1 })}
+                                variant="outline"
+                                size="icon"
+                                className="w-8 h-8 border-blue-300 hover:bg-blue-50"
+                              >
+                                <Plus className="w-4 h-4" />
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       )}

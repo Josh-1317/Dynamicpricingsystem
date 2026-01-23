@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Order, OrderItem } from '../../types/order';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
@@ -66,6 +66,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
       productId: product.id,
       productName: product.name,
       quantity: 1,
+      kg: 0,
       unitPrice: 0,
       subtotal: 0
     };
@@ -129,7 +130,7 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
         <DialogHeader>
           <DialogTitle>Modify Order #{order.id} (Admin)</DialogTitle>
           <DialogDescription>
-            Add/remove items and set pricing. Client will be notified to review changes.
+            Add/remove items, adjust quantities/weights, and set pricing. Client will be notified to review changes.
           </DialogDescription>
         </DialogHeader>
 
@@ -155,6 +156,19 @@ export function AdminOrderModification({ order, isOpen, onClose }: AdminOrderMod
                         onChange={(e) =>
                           handleQuantityChange(item.productId, parseInt(e.target.value) || 0)
                         }
+                        className="w-20 text-center"
+                        min="0"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Label className="text-sm text-gray-600 w-6">kg:</Label>
+                      <Input
+                        type="number"
+                        value={item.kg || 0}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value) || 0;
+                          setModifiedItems(prev => prev.map(pi => pi.productId === item.productId ? { ...pi, kg: val } : pi));
+                        }}
                         className="w-20 text-center"
                         min="0"
                       />

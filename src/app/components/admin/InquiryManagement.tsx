@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -10,7 +10,6 @@ import { Separator } from '../ui/separator';
 import {
   DollarSign,
   Send,
-  Calendar,
   CheckCircle,
   Package,
   Lock,
@@ -246,7 +245,9 @@ export function InquiryManagement() {
                           <div key={item.productId} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                             <div className="flex-1">
                               <p className="font-medium">{item.productName}</p>
-                              <Badge variant="outline" className="mt-1">Qty: {item.quantity}</Badge>
+                              <Badge variant="outline" className="mt-1">
+                                Qty: {item.quantity} {item.kg ? `(${item.kg} kg)` : ''}
+                              </Badge>
                             </div>
                             {(order.status === 'new_inquiry' || order.status === 'pending_pricing') && isPricing ? (
                               <div className="flex flex-col gap-1 items-end">

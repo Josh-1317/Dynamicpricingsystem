@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { Order, OrderItem } from '../../types/order';
@@ -112,7 +112,7 @@ export function OrderModificationDialog({ order, isOpen, onClose }: OrderModific
         <DialogHeader>
           <DialogTitle>Modify Order #{order.id}</DialogTitle>
           <DialogDescription>
-            Add new items, remove existing ones, or adjust quantities. Prices will be re-calculated by admin.
+            Add new items, remove existing ones, or adjust quantities and weights. Prices will be re-calculated by admin.
           </DialogDescription>
         </DialogHeader>
 
@@ -140,9 +140,19 @@ export function OrderModificationDialog({ order, isOpen, onClose }: OrderModific
                       className="w-24 text-center"
                       min="0"
                     />
-                    <span className="text-sm text-gray-500 w-8">
-                      kg
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <Label className="text-sm text-gray-600">kg:</Label>
+                      <Input
+                        type="number"
+                        value={item.kg || 0}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value) || 0;
+                          setModifiedItems(prev => prev.map(pi => pi.productId === item.productId ? { ...pi, kg: val } : pi));
+                        }}
+                        className="w-24 text-center"
+                        min="0"
+                      />
+                    </div>
                   </div>
                   <Button
                     onClick={() => handleRemoveItem(item.productId)}
