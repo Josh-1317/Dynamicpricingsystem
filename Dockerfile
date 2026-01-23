@@ -11,11 +11,7 @@ COPY . .
 # Build the frontend
 RUN npm run build
 
-# ENV PORT=3000 (Let Platform set this)
-# EXPOSE (Removed to let Platform manage ports)
-
-
+ENV PORT=3000
+EXPOSE 3000
 
 CMD ["node", "mock-server.js"]
-
-

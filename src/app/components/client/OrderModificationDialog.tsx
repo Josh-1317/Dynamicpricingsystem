@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { useAuth } from '../../context/AuthContext';
 import { Order, OrderItem } from '../../types/order';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
@@ -17,7 +18,8 @@ interface OrderModificationDialogProps {
 }
 
 export function OrderModificationDialog({ order, isOpen, onClose }: OrderModificationDialogProps) {
-  const { products, updateOrder, addAuditEntry, currentUser } = useApp();
+  const { products, updateOrder, addAuditEntry } = useApp();
+  const { currentUser } = useAuth();
   const [modifiedItems, setModifiedItems] = useState<OrderItem[]>([...order.items]);
   const [selectedProductId, setSelectedProductId] = useState<string>('');
 
@@ -138,6 +140,9 @@ export function OrderModificationDialog({ order, isOpen, onClose }: OrderModific
                       className="w-24 text-center"
                       min="0"
                     />
+                    <span className="text-sm text-gray-500 w-8">
+                      {products.find(p => p.id === item.productId)?.unitOfMeasure}
+                    </span>
                   </div>
                   <Button
                     onClick={() => handleRemoveItem(item.productId)}

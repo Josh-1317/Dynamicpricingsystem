@@ -177,6 +177,7 @@ export function CatalogBrowser() {
                             className="text-center bg-white"
                             min="0"
                           />
+                          <span className="text-sm font-medium text-gray-600 min-w-[20px] text-center">{product.unitOfMeasure}</span>
                           <Button
                             onClick={() => updateQuantity(product.id, 1)}
                             variant="outline"

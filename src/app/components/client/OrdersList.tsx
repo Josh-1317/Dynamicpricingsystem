@@ -31,7 +31,7 @@ const statusConfig: Record<OrderStatus, { label: string; color: string; icon: an
 };
 
 export function OrdersList() {
-  const { orders, updateOrder, addAuditEntry } = useApp();
+  const { orders, products, updateOrder, addAuditEntry } = useApp();
   const { currentUser } = useAuth();
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [modifyingOrder, setModifyingOrder] = useState<Order | null>(null);
@@ -139,7 +139,9 @@ export function OrdersList() {
                           <p className="font-medium">{item.productName}</p>
                         </div>
                         <div className="flex items-center gap-4">
-                          <Badge variant="outline" className="bg-white">Qty: {item.quantity}</Badge>
+                          <Badge variant="outline" className="bg-white">
+                            Qty: {item.quantity} {products.find(p => p.id === item.productId)?.unitOfMeasure}
+                          </Badge>
                           {item.unitPrice && (
                             <>
                               <span className="text-sm text-gray-600">
