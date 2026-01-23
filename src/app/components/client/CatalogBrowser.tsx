@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/button';
@@ -10,7 +10,7 @@ import { OrderItem } from '../../types/order';
 import { toast } from 'sonner';
 
 export function CatalogBrowser() {
-  const { products, addOrder, addAuditEntry } = useApp();
+  const { products, addOrder } = useApp();
   const { currentUser } = useAuth();
   const [cart, setCart] = useState<Map<string, number>>(new Map());
 
@@ -150,42 +150,45 @@ export function CatalogBrowser() {
                           Add to Inquiry
                         </Button>
                       ) : (
-                        <div className="flex items-center gap-2 w-full">
-                          <Button
-                            onClick={() => updateQuantity(product.id, -1)}
-                            variant="outline"
-                            size="icon"
-                            className="border-blue-300 hover:bg-blue-50"
-                          >
-                            <Minus className="w-4 h-4" />
-                          </Button>
-                          <Input
-                            type="number"
-                            value={quantity}
-                            onChange={(e) => {
-                              const newQty = parseInt(e.target.value) || 0;
-                              setCart(prev => {
-                                const newCart = new Map(prev);
-                                if (newQty === 0) {
-                                  newCart.delete(product.id);
-                                } else {
-                                  newCart.set(product.id, newQty);
-                                }
-                                return newCart;
-                              });
-                            }}
-                            className="text-center bg-white"
-                            min="0"
-                          />
-                          <span className="text-sm font-medium text-gray-600 min-w-[20px] text-center">{product.unitOfMeasure}</span>
-                          <Button
-                            onClick={() => updateQuantity(product.id, 1)}
-                            variant="outline"
-                            size="icon"
-                            className="border-blue-300 hover:bg-blue-50"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </Button>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-sm font-medium text-gray-700">Quantity</span>
+                          <div className="flex items-center gap-2 w-full">
+                            <Button
+                              onClick={() => updateQuantity(product.id, -1)}
+                              variant="outline"
+                              size="icon"
+                              className="border-blue-300 hover:bg-blue-50"
+                            >
+                              <Minus className="w-4 h-4" />
+                            </Button>
+                            <Input
+                              type="number"
+                              value={quantity}
+                              onChange={(e) => {
+                                const newQty = parseInt(e.target.value) || 0;
+                                setCart(prev => {
+                                  const newCart = new Map(prev);
+                                  if (newQty === 0) {
+                                    newCart.delete(product.id);
+                                  } else {
+                                    newCart.set(product.id, newQty);
+                                  }
+                                  return newCart;
+                                });
+                              }}
+                              className="text-center bg-white"
+                              min="0"
+                            />
+                            <span className="text-sm font-medium text-gray-600 min-w-[20px] text-center">{product.unitOfMeasure}</span>
+                            <Button
+                              onClick={() => updateQuantity(product.id, 1)}
+                              variant="outline"
+                              size="icon"
+                              className="border-blue-300 hover:bg-blue-50"
+                            >
+                              <Plus className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </div>
                       )}
                     </div>
