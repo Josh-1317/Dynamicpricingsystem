@@ -141,7 +141,7 @@ export function OrderModificationDialog({ order, isOpen, onClose }: OrderModific
                       min="0"
                     />
                     <span className="text-sm text-gray-500 w-8">
-                      {products.find(p => p.id === item.productId)?.unitOfMeasure}
+                      kg
                     </span>
                   </div>
                   <Button

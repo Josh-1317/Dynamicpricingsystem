@@ -150,14 +150,14 @@ export function CatalogBrowser() {
                           Add to Inquiry
                         </Button>
                       ) : (
-                        <div className="flex flex-col gap-2">
-                          <span className="text-sm font-medium text-gray-700">Quantity</span>
-                          <div className="flex items-center gap-2 w-full">
+                        <div className="flex items-center justify-between mt-4">
+                          <span className="text-sm font-medium text-gray-700">Quantity (kg)</span>
+                          <div className="flex items-center gap-2">
                             <Button
                               onClick={() => updateQuantity(product.id, -1)}
                               variant="outline"
                               size="icon"
-                              className="border-blue-300 hover:bg-blue-50"
+                              className="w-8 h-8 border-blue-300 hover:bg-blue-50"
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
@@ -176,15 +176,14 @@ export function CatalogBrowser() {
                                   return newCart;
                                 });
                               }}
-                              className="text-center bg-white"
+                              className="w-20 text-center bg-white h-8"
                               min="0"
                             />
-                            <span className="text-sm font-medium text-gray-600 min-w-[20px] text-center">{product.unitOfMeasure}</span>
                             <Button
                               onClick={() => updateQuantity(product.id, 1)}
                               variant="outline"
                               size="icon"
-                              className="border-blue-300 hover:bg-blue-50"
+                              className="w-8 h-8 border-blue-300 hover:bg-blue-50"
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
