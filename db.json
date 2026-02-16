@@ -1,0 +1,247 @@
+{
+  "orders": [
+    {
+      "order_id": "ORD-1766682785532",
+      "client_name": "josh",
+      "mobile": "",
+      "status": "closed",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":22,\"subtotal\":22},{\"productId\":\"p2\",\"productName\":\"Cement Bags\",\"quantity\":1,\"unitPrice\":22,\"subtotal\":22}]",
+      "total_amount": 44,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:13:05.533Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $44.00\",\"timestamp\":\"2025-12-25T17:14:20.421Z\"},{\"action\":\"Quote Accepted\",\"user\":\"josh\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:14:50.427Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CASH\",\"timestamp\":\"2025-12-25T17:17:49.843Z\"},{\"action\":\"Payment Received\",\"user\":\"Admin\",\"details\":\"Payment marked as paid\",\"timestamp\":\"2025-12-25T17:17:54.269Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:17:55.788Z\"},{\"action\":\"Goods Received\",\"user\":\"josh\",\"details\":\"Confirmed receipt with 5 stars. Order CLOSED (payment received + goods confirmed)\",\"timestamp\":\"2025-12-25T17:19:17.285Z\"}]",
+      "created_at": "2025-12-25T17:13:05.532Z",
+      "payment_status": "paid",
+      "meta_json": "{\"clientId\":\"CLI-1766682773647\",\"paymentType\":\"cash\",\"rating\":5}",
+      "dispatch_date": "2025-12-25T17:17:55.787Z",
+      "goods_received_date": "2025-12-25T17:19:17.275Z"
+    },
+    {
+      "order_id": "ORD-1766683890929",
+      "client_name": "josh",
+      "mobile": "",
+      "status": "dispatched",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":200,\"subtotal\":200},{\"productId\":\"p2\",\"productName\":\"Cement Bags\",\"quantity\":1,\"unitPrice\":500,\"subtotal\":500},{\"productId\":\"p10\",\"productName\":\"Ceramic Floor Tiles\",\"quantity\":1,\"unitPrice\":600,\"subtotal\":600}]",
+      "total_amount": 1300,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:31:30.929Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $822.00\",\"timestamp\":\"2025-12-25T17:31:43.062Z\"},{\"action\":\"Order Modified\",\"user\":\"josh\",\"details\":\"Updated to 3 item(s)\",\"timestamp\":\"2025-12-25T17:31:57.407Z\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $1300.00\",\"timestamp\":\"2025-12-25T17:32:15.900Z\"},{\"action\":\"Quote Accepted\",\"user\":\"josh\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:32:22.772Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CASH\",\"timestamp\":\"2025-12-25T17:32:29.332Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CREDIT - Due: 2025-02-22\",\"timestamp\":\"2025-12-25T17:32:46.377Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:32:58.334Z\"},{\"action\":\"Goods Received\",\"user\":\"josh\",\"details\":\"Confirmed receipt with 5 stars. Awaiting payment clearance to close order\",\"timestamp\":\"2025-12-25T17:33:11.037Z\"}]",
+      "created_at": "2025-12-25T17:31:30.929Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"CLI-1766682773647\",\"paymentType\":\"credit\",\"paymentDueDate\":\"2025-02-22T00:00:00.000Z\",\"rating\":5,\"feedback\":\"good\"}",
+      "dispatch_date": "2025-12-25T17:32:58.330Z",
+      "goods_received_date": "2025-12-25T17:33:11.033Z"
+    },
+    {
+      "order_id": "ORD-1766684031648",
+      "client_name": "user",
+      "mobile": "",
+      "status": "dispatched",
+      "items_json": "[{\"productId\":\"p1\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":500,\"subtotal\":500}]",
+      "total_amount": 500,
+      "is_locked": true,
+      "audit_log": "[{\"timestamp\":\"2025-12-25T17:33:51.649Z\",\"action\":\"Order Created\",\"user\":\"user\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $500.00\",\"timestamp\":\"2025-12-25T17:34:07.575Z\"},{\"action\":\"Quote Accepted\",\"user\":\"user\",\"details\":\"Client confirmed the order\",\"timestamp\":\"2025-12-25T17:34:13.226Z\"},{\"action\":\"Payment Terms Set\",\"user\":\"Admin\",\"details\":\"CREDIT - Due: 2025-02-22\",\"timestamp\":\"2025-12-25T17:34:19.145Z\"},{\"action\":\"Order Dispatched\",\"user\":\"Admin\",\"details\":\"Materials in transit\",\"timestamp\":\"2025-12-25T17:34:21.191Z\"},{\"action\":\"Goods Received\",\"user\":\"user\",\"details\":\"Confirmed receipt with 5 stars. Awaiting payment clearance to close order\",\"timestamp\":\"2025-12-25T17:34:29.641Z\"}]",
+      "created_at": "2025-12-25T17:33:51.648Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"CLI-1766684027266\",\"paymentType\":\"credit\",\"paymentDueDate\":\"2025-02-22T00:00:00.000Z\",\"rating\":5}",
+      "dispatch_date": "2025-12-25T17:34:21.190Z",
+      "goods_received_date": "2025-12-25T17:34:29.639Z"
+    },
+    {
+      "order_id": "TEST-1766740317430",
+      "client_name": "Test Client",
+      "mobile": "1234567890",
+      "status": "new_inquiry",
+      "items_json": "[]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[]",
+      "created_at": "2025-12-26T09:11:57.433Z",
+      "payment_status": "pending",
+      "meta_json": "{}"
+    },
+    {
+      "order_id": "ORD-1766740425296",
+      "client_name": "user",
+      "mobile": "12344444567",
+      "status": "new_inquiry",
+      "items_json": "[{\"productId\":\"prod-1766739340460-857k1sqon\",\"productName\":\"Aggregate Stone\",\"quantity\":1}]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2025-12-26T09:13:45.296Z\",\"action\":\"Order Created\",\"user\":\"user\",\"details\":\"Initial inquiry submitted\"}]",
+      "created_at": "2025-12-26T09:13:45.296Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1766740421861\"}"
+    },
+    {
+      "order_id": "ORD-1769095414738",
+      "client_name": "josh",
+      "mobile": "1234567890",
+      "status": "new_inquiry",
+      "items_json": "[{\"productId\":\"prod-1766739340381-1z0k2bmy3\",\"productName\":\"Cement Bags\",\"quantity\":2},{\"productId\":\"prod-1766739340283-hxfh9kw9n\",\"productName\":\"Premium Steel Rods\",\"quantity\":1}]",
+      "total_amount": 0,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2026-01-22T15:23:34.738Z\",\"action\":\"Order Created\",\"user\":\"josh\",\"details\":\"Initial inquiry submitted\"}]",
+      "created_at": "2026-01-22T15:23:34.738Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1769095220490\"}"
+    },
+    {
+      "order_id": "ORD-1769095814885",
+      "client_name": "Test Client",
+      "mobile": "9999999999",
+      "status": "waiting_approval",
+      "items_json": "[{\"productId\":\"prod-1766739340283-hxfh9kw9n\",\"productName\":\"Premium Steel Rods\",\"quantity\":1,\"unitPrice\":10,\"subtotal\":10}]",
+      "total_amount": 10,
+      "is_locked": false,
+      "audit_log": "[{\"timestamp\":\"2026-01-22T15:30:14.885Z\",\"action\":\"Order Created\",\"user\":\"Test Client\",\"details\":\"Initial inquiry submitted\"},{\"action\":\"Pricing Set\",\"user\":\"Admin\",\"details\":\"Total: $10.00\",\"timestamp\":\"2026-01-22T15:37:31.916Z\"}]",
+      "created_at": "2026-01-22T15:30:14.885Z",
+      "payment_status": "pending",
+      "meta_json": "{\"clientId\":\"user-1769095760671\"}"
+    }
+  ],
+  "products": [
+    {
+      "id": "RM01",
+      "name": "WEIGHTLESS CHARCOAL",
+      "description": "Ash: 15-20%, Bulk Density: 0.25-0.32. #RM01",
+      "unitOfMeasure": "Pack (40kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1624641477726-53896bc35688?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM02",
+      "name": "FLORA BATHI CHARCOAL",
+      "description": "Ash: 20-30%, Bulk Density: 0.4-0.5. #RM02",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm02.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM03",
+      "name": "COCONUT SHELL CHARCOAL",
+      "description": "Ash: 25-35%, Bulk Density: 0.4-0.5. #RM03",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm03.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM04",
+      "name": "RAW BATHI CHARCOAL",
+      "description": "Ash: 20-30%, Bulk Density: 0.4-0.5. #RM04",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1624641477726-53896bc35688?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM05",
+      "name": "RAW BATHI CHARCOAL (Grade 2)",
+      "description": "Ash: 40-50%, Bulk Density: 0.45-0.55. #RM05",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1624641477726-53896bc35688?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM06",
+      "name": "BROWN SAW DUST",
+      "description": "Ash: 0-5%, Bulk Density: 0.35-0.45. #RM06",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1616782352125-9c988a215324?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM07",
+      "name": "WHITE SAW DUST",
+      "description": "Ash: 0-5%, Bulk Density: 0.25-0.35. #RM07",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm07.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM08",
+      "name": "KUPPAM SAW DUST",
+      "description": "Ash: 5-15%, Bulk Density: 0.4-0.55. #RM08",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1616782352125-9c988a215324?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM09",
+      "name": "T1 WOOD POWDER",
+      "description": "Ash: 0-5%, Bulk Density: 0.3-0.4. #RM09",
+      "unitOfMeasure": "Pack (40kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm09.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM10",
+      "name": "JOSS POWDER",
+      "description": "Ash: 0-5%, Viscosity: 42 Cups. #RM10",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1615671040825-998845c43232?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM11",
+      "name": "BAMBOO STICKS",
+      "description": "Types: 8\", 9\", 12\". Dia: 1.3mm, Wastage: 0-2%. #RM11",
+      "unitOfMeasure": "Pack (30kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm11.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM12",
+      "name": "MODIFIED STARCH",
+      "description": "Ash: 0-5%, Viscosity: Upto 12000 cps. #RM12",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "/products/rm12.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM13",
+      "name": "POTASSIUM NITRATE",
+      "description": "Solubility: 100% in Water, Grade: Fire House. #RM13",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "chemicals",
+      "imageUrl": "/products/rm13.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM14",
+      "name": "GUAR GUM",
+      "description": "Ash: 0-5%, Viscosity Types: 2000cps, 8000cps. #RM14",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "chemicals",
+      "imageUrl": "/products/rm14.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM15",
+      "name": "ACRYLIC POLIMER",
+      "description": "Origin: China. #RM15",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "chemicals",
+      "imageUrl": "/products/rm15.png",
+      "unitPrice": 0
+    },
+    {
+      "id": "RM16",
+      "name": "DAMAR BATTU POWDER",
+      "description": "Ash: 0-5%, Bulk Density: 0.35-0.4. #RM16",
+      "unitOfMeasure": "Pack (50kg)",
+      "category": "Raw Materials",
+      "imageUrl": "https://images.unsplash.com/photo-1615671040825-998845c43232?w=800&auto=format&fit=crop&q=60",
+      "unitPrice": 0
+    }
+  ]
+}
